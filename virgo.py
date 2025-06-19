@@ -1,16 +1,21 @@
 import sys 
 import os 
 from virgo.core.lightserver import serve
-import test.routes
-
+import apps.testproject.routes
 
 def start_project(project_name):
-    os.makedirs(project_name, exist_ok=True)
+    apps_dir = "apps"
+    project_path = os.path.join(apps_dir, project_name)
 
-    with open(os.path.join(project_name, "__init__.py"), "w") as f:
+    # ✅ Create apps/<project_name> including the apps/ folder
+    os.makedirs(project_path, exist_ok=True)
+
+    # __init__.py
+    with open(os.path.join(project_path, "__init__.py"), "w") as f:
         f.write("")
 
-    with open(os.path.join(project_name, "routes.py"), "w") as f:
+    # routes.py
+    with open(os.path.join(project_path, "routes.py"), "w") as f:
         f.write(f"""from virgo.core.routing import routes
 from virgo.core.response import Response
 from virgo.core.template import render
@@ -20,7 +25,9 @@ def sample(request):
 
 routes["/sample"] = sample
 """)
-        print(f"App '{project_name}' created successfully.")
+
+    print(f"App '{project_name}' created successfully at 'apps/{project_name}'.")
+
 
 if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else ""
