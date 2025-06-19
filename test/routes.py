@@ -1,8 +1,9 @@
 from virgo.core.routing import routes
-from virgo.core.lightserver import Response
+from virgo.core.response import Response
+from virgo.core.template import render
 
 def home(request):
-    return Response("Welcome to Virgo!")
+    return render("home.html", {"name":"Virgo"})
 
 def about(request):
     return Response("Welcome to About page!")

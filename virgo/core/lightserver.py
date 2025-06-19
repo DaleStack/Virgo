@@ -1,17 +1,11 @@
 from wsgiref.simple_server import make_server
 from virgo.core.routing import routes
+from virgo.core.response import Response
 
 class Request:
     def __init__(self, environ):
         self.method = environ["REQUEST_METHOD"]
         self.path = environ["PATH_INFO"]
-
-class Response:
-    def __init__(self, body, status="200 OK", content_type="text/html"):
-            self.body = body.encode("utf-8")
-            self.status = status
-            self.headers = [("Content-Type", content_type)]
-        
 
 def app(environ, start_response):
     request = Request(environ)
