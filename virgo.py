@@ -15,10 +15,10 @@ def start_project(project_name):
 from virgo.core.response import Response
 from virgo.core.template import render
 
-def home(request):
+def sample(request):
     return Response("Welcome to Virgo!")
 
-routes["/"] = home
+routes["/sample"] = sample
 """)
         print(f"App '{project_name}' created successfully.")
 
