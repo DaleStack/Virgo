@@ -63,3 +63,23 @@ py virgo.py lightserve
 ```bash
 http://127.0.0.1:8000/sample
 ```
+
+### Creating Own Function
+
+#### Create new function:
+```Python
+#apps/blog/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response
+from virgo.core.template import render
+
+def sample(request):
+    return Response("Welcome to Virgo!")
+routes["/sample"] = sample
+
+# Define new function
+def new_function(request):
+  return Response("This is a new function")
+routes["/"] = new_function
+# routes["/"] is the Route Path and new_function is the name of the function
+```
