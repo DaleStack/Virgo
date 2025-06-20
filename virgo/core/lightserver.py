@@ -32,7 +32,7 @@ def app(environ, start_response):
         start_response("404 Not Found", [("Content-Type", "text/plain")])
         return [b"Static file not found"]
 
-    # ✅ Proceed with normal routing
+    # Proceed with normal routing
     view_func, kwargs = match_route(path)
     if view_func:
         response = view_func(request, **kwargs)
