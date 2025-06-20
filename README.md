@@ -22,9 +22,11 @@ Built for learning and hacking — inspired by Django, but simplified for clarit
 ```bash
 py virgo.py lightstart blog
 
+```bash
 apps/
   blog/
     __init__.py
     routes.py
     templates/
     static/
+
