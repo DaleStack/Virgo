@@ -92,3 +92,14 @@ routes["/"] = new_function
 #virgo.py
 import apps.blog.routes
 ```
+
+#### start the dev server again:
+```bash
+#bash
+py virgo.py lightserve
+```
+
+#### Visit:
+```bash
+http://127.0.0.1:8000/
+```
