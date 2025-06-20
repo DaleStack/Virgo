@@ -1,9 +1,14 @@
 import os
 from virgo.core.response import Response
 
-def render(template_name, context=None):
+def render(template_name, context=None, app=None):
     context = context or {}
-    template_path = os.path.join(os.getcwd(), "templates", template_name)
+
+    # Determine template path
+    if app:
+        template_path = os.path.join(os.getcwd(), "apps", app, "templates", template_name)
+    else:
+        template_path = os.path.join(os.getcwd(), "templates", template_name)
 
     if not os.path.exists(template_path):
         return Response("Template not found", status="500 INTERNAL SERVER ERROR")

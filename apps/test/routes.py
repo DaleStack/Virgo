@@ -4,7 +4,7 @@ from virgo.core.template import render
 
 
 def greet(request, name):
-    return render("profile.html", {"name":name})
+    return render("profile.html", {"name":name}, app="test")
 
 def home(request):
     return Response("Homepage!")
