@@ -1,7 +1,7 @@
 # Virgo 🌌 — A Beginner-Friendly Python Web Framework
 
 **Virgo** is a minimal, batteries-included web framework written in Python.  
-Built for learning and hacking — inspired by Django, but simplified for clarity.
+Built for learning — inspired by Django, but simplified for clarity.
 
 ---
 
@@ -32,4 +32,16 @@ apps/
     routes.py
     templates/
     static/
+```
+
+```Python
+#apps/blog/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response
+from virgo.core.template import render
+
+def sample(request):
+    return Response("Welcome to Virgo!")
+
+routes["/sample"] = sample
 ```
