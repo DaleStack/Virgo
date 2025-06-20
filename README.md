@@ -57,6 +57,7 @@ import apps.blog.routes
 
 #### Then start the dev server:
 ```bash
+#bash
 py virgo.py lightserve
 ```
 
