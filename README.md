@@ -46,7 +46,7 @@ def sample(request):
 routes["/sample"] = sample
 ```
 --
-### Run The Server
+## Run The Server
 
 #### Import your app in virgo.py:
 ```Python
