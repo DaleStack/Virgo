@@ -84,3 +84,9 @@ routes["/"] = new_function
 # routes["/"] is the Route Path
 # new_function is the name of the function
 ```
+
+#### Remember to import your app in virgo.py:
+```Python
+#virgo.py
+import apps.blog.routes
+```
