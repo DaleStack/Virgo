@@ -1,7 +1,6 @@
 import sys
 import os
 from virgo.core.lightserver import serve
-import apps.project0.routes
 
 def start_project(project_name):
     apps_dir = "apps"

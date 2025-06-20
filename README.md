@@ -14,3 +14,10 @@ Built for learning and hacking — inspired by Django, but simplified for clarit
 - CLI for starting new apps
 
 ---
+
+## 🚀 Getting Started
+
+### Create a new app
+
+```bash
+py virgo.py lightstart blog
