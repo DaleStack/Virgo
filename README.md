@@ -93,7 +93,7 @@ routes["/"] = new_function
 import apps.blog.routes
 ```
 
-#### start the dev server again:
+#### Start the dev server again:
 ```bash
 #bash
 py virgo.py lightserve
@@ -103,3 +103,5 @@ py virgo.py lightserve
 ```bash
 http://127.0.0.1:8000/
 ```
+
+## Dynamic Routing
