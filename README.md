@@ -20,6 +20,7 @@ Built for learning — inspired by Django, but simplified for clarity.
 ## Create a new app
 
 ```bash
+#bash
 py virgo.py lightstart blog
 
 ```
