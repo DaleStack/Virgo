@@ -87,7 +87,7 @@ routes["/"] = new_function
 # new_function is the name of the function
 ```
 
-#### Remember to import your app in virgo.py:
+#### Remember to import your app in virgo.py (If you haven't done it yet):
 ```Python
 #virgo.py
 import apps.blog.routes
