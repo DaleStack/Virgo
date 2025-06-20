@@ -34,6 +34,7 @@ apps/
     static/
 ```
 
+#### Routes Initial View
 ```Python
 #apps/blog/routes.py
 from virgo.core.routing import routes
