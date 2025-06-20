@@ -7,10 +7,10 @@ Built for learning and hacking — inspired by Django, but simplified for clarit
 
 ## 📦 Features
 
-- ✅ Manual + typed routing (`<int:id>`, `<str:name>`)
-- ✅ WSGI-compatible dev server
-- ✅ Per-app templates and static files
-- ✅ CLI for starting new apps
-- ✅ Zero dependencies
+- Manual + typed routing (`<int:id>`, `<str:name>`)
+- Dynamic Routing
+- WSGI-compatible dev server
+- Per-app templates and static files
+- CLI for starting new apps
 
 ---
