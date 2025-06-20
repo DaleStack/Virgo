@@ -17,7 +17,7 @@ Built for learning — inspired by Django, but simplified for clarity.
 
 ## 🚀 Getting Started
 
-### Create a new app
+## Create a new app
 
 ```bash
 py virgo.py lightstart blog
@@ -45,7 +45,7 @@ def sample(request):
     return Response("Welcome to Virgo!")
 routes["/sample"] = sample
 ```
-
+--
 ### Run The Server
 
 #### Import your app in virgo.py:
@@ -64,7 +64,7 @@ py virgo.py lightserve
 http://127.0.0.1:8000/sample
 ```
 
-### Creating Own Function
+## Creating Own Function
 
 #### Create new function:
 ```Python
