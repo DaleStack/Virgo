@@ -81,5 +81,6 @@ routes["/sample"] = sample
 def new_function(request):
   return Response("This is a new function")
 routes["/"] = new_function
-# routes["/"] is the Route Path and new_function is the name of the function
+# routes["/"] is the Route Path
+# new_function is the name of the function
 ```
