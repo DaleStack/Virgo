@@ -13,7 +13,7 @@ def app(environ, start_response):
     request = Request(environ)
     path = request.path
 
-    # ✅ Serve static files like /static/blog/style.css
+    # Serve static files 
     if path.startswith("/static/"):
         parts = path.split("/")
         if len(parts) >= 3:
