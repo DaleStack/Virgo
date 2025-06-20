@@ -1,22 +1,25 @@
-import sys 
-import os 
+import sys
+import os
 from virgo.core.lightserver import serve
-import apps.test.routes
+import apps.project0.routes
 
 def start_project(project_name):
     apps_dir = "apps"
     project_path = os.path.join(apps_dir, project_name)
+    templates_path = os.path.join(project_path, "templates")
+    static_path = os.path.join(project_path, "static")
 
-    # Create apps/<project_name> including the apps/ folder
-    os.makedirs(project_path, exist_ok=True)
+    # Create folders
+    os.makedirs(templates_path, exist_ok=True)
+    os.makedirs(static_path, exist_ok=True)
 
     # __init__.py
-    with open(os.path.join(project_path, "__init__.py"), "w") as f:
+    with open(os.path.join(project_path, "__init__.py"), "w", encoding="utf-8") as f:
         f.write("")
 
     # routes.py
-    with open(os.path.join(project_path, "routes.py"), "w") as f:
-        f.write(f"""from virgo.core.routing import routes
+    with open(os.path.join(project_path, "routes.py"), "w", encoding="utf-8") as f:
+        f.write(f'''from virgo.core.routing import routes
 from virgo.core.response import Response
 from virgo.core.template import render
 
@@ -24,10 +27,9 @@ def sample(request):
     return Response("Welcome to Virgo!")
 
 routes["/sample"] = sample
-""")
+''')
 
-    print(f"App '{project_name}' created successfully at 'apps/{project_name}'.")
-
+    print(f"App '{project_name}' created successfully at '{project_path}'.")
 
 if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else ""
@@ -39,7 +41,5 @@ if __name__ == "__main__":
             print("Usage: py virgo.py lightstart <project_name>")
         else:
             start_project(sys.argv[2])
-
-
     else:
         print("Unknown command. Try: py virgo.py [lightserve | lightstart]")

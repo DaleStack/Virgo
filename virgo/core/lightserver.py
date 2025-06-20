@@ -1,6 +1,8 @@
 from wsgiref.simple_server import make_server
 from virgo.core.routing import match_route
 from virgo.core.response import Response
+from mimetypes import guess_type
+import os
 
 class Request:
     def __init__(self, environ):
@@ -9,12 +11,30 @@ class Request:
 
 def app(environ, start_response):
     request = Request(environ)
+    path = request.path
 
-    #Use match_route() 
-    view_func, kwargs = match_route(request.path)
+    # ✅ Serve static files like /static/blog/style.css
+    if path.startswith("/static/"):
+        parts = path.split("/")
+        if len(parts) >= 3:
+            app_name = parts[2]
+            file_parts = parts[3:]  # The rest of the path
+            static_file_path = os.path.join("apps", app_name, "static", *file_parts)
 
+            if os.path.exists(static_file_path):
+                content_type, _ = guess_type(static_file_path)
+                with open(static_file_path, "rb") as f:
+                    body = f.read()
+                start_response("200 OK", [("Content-Type", content_type or "application/octet-stream")])
+                return [body]
+
+        # If file not found
+        start_response("404 Not Found", [("Content-Type", "text/plain")])
+        return [b"Static file not found"]
+
+    # ✅ Proceed with normal routing
+    view_func, kwargs = match_route(path)
     if view_func:
-        #Pass kwargs to the view
         response = view_func(request, **kwargs)
     else:
         response = Response("404 Not Found", status="404 Not Found")
