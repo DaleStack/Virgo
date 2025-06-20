@@ -24,6 +24,7 @@ py virgo.py lightstart blog
 
 ```
 
+#### Creates:
 ```bash
 apps/
   blog/
