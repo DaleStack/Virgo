@@ -59,3 +59,8 @@ import apps.blog.routes
 ```bash
 py virgo.py lightserve
 ```
+
+#### Visit:
+```bash
+http://127.0.0.1:8000/sample
+```
