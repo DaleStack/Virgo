@@ -34,7 +34,7 @@ apps/
     static/
 ```
 
-#### Routes Initial View
+#### Routes Initial View:
 ```Python
 #apps/blog/routes.py
 from virgo.core.routing import routes
@@ -45,4 +45,17 @@ def sample(request):
     return Response("Welcome to Virgo!")
 
 routes["/sample"] = sample
+```
+
+### Run The Server
+
+#### Import your app in virgo.py:
+```Python
+#virgo.py
+import apps.blog.routes
+```
+
+#### Then start the dev server:
+```bash
+py virgo.py lightserve
 ```
