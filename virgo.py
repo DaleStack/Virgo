@@ -1,13 +1,13 @@
 import sys 
 import os 
 from virgo.core.lightserver import serve
-import apps.testproject.routes
+import apps.test.routes
 
 def start_project(project_name):
     apps_dir = "apps"
     project_path = os.path.join(apps_dir, project_name)
 
-    # ✅ Create apps/<project_name> including the apps/ folder
+    # Create apps/<project_name> including the apps/ folder
     os.makedirs(project_path, exist_ok=True)
 
     # __init__.py

@@ -1,5 +1,5 @@
 from wsgiref.simple_server import make_server
-from virgo.core.routing import routes
+from virgo.core.routing import match_route
 from virgo.core.response import Response
 
 class Request:
@@ -9,17 +9,20 @@ class Request:
 
 def app(environ, start_response):
     request = Request(environ)
-    view_func = routes.get(request.path)
-    
+
+    #Use match_route() 
+    view_func, kwargs = match_route(request.path)
+
     if view_func:
-         response = view_func(request)
+        #Pass kwargs to the view
+        response = view_func(request, **kwargs)
     else:
-         response = Response("404 Not Found", status="404 Not Found")
+        response = Response("404 Not Found", status="404 Not Found")
 
     start_response(response.status, response.headers)
     return [response.body]
 
 def serve():
     with make_server('', 8000, app) as httpd:
-        print("Virgo development is running at http://127.0.0.1:8000")
+        print("Virgo development server running at http://127.0.0.1:8000")
         httpd.serve_forever()
