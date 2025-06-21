@@ -6,10 +6,10 @@ Built for learning — inspired by Django, but simplified for clarity.
 ---
 
 ## 📦 Features
+- WSGI-compatible dev server
 - CLI for starting new apps
 - App-based Structure
 - Dynamic Routing
-- WSGI-compatible dev server
 - Per-app templates and static files
 - Context Passing Support
 ---
@@ -127,3 +127,5 @@ http://127.0.0.1:8000/profile/JohnDoe
 ```bash
 This is JohnDoe's Profile
 ```
+
+## Templating
