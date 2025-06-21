@@ -122,3 +122,8 @@ py virgo.py lightserve
 ```bash
 http://127.0.0.1:8000/profile/JohnDoe
 ```
+
+#### Result:
+```bash
+This is JohnDoe's Profile
+```
