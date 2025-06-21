@@ -129,3 +129,14 @@ This is JohnDoe's Profile
 ```
 
 ## Templating
+
+#### Use render() in your function:
+
+```Python
+def example(request):
+  return render("home.html", app="example_app")
+routes["/example"] = example
+
+# "home.html" is the name of the template
+# app="example_app" is the name of the app
+```
