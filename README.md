@@ -154,7 +154,7 @@ routes["/example"] = example
 #### Create a template:
 ```bash
 apps/
-  example_app/
+  example_app/ # app="example_app" is referring to this
     __init__.py
     routes.py
     templates/
