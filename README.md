@@ -162,7 +162,7 @@ apps/
     static/
 ```
 
-#### Navigate to home.html and create your template:
+#### Navigate to home.html and build your template:
 
 ```HTML
 <!--example_app/templates/home.html-->
@@ -177,4 +177,21 @@ apps/
   <h1>This is my template</h1>
 </body>
 </html>
+```
+
+#### Import your app in virgo.py:
+```Python
+#virgo.py
+import apps.example_app.routes
+```
+
+#### Run the dev server:
+```bash
+#bash
+py virgo.py lightserve
+```
+
+#### Visit:
+```bash
+http://127.0.0.1:8000/example
 ```
