@@ -130,7 +130,17 @@ This is JohnDoe's Profile
 
 ## Templating
 
-#### Use render() in your function:
+#### File Structure:
+```bash
+apps/
+  example_app/
+    __init__.py
+    routes.py
+    templates/
+    static/
+```
+
+#### Navigate to routes.py and create a function that will return render():
 
 ```Python
 def example(request):
@@ -139,4 +149,15 @@ routes["/example"] = example
 
 # "home.html" is the name of the template
 # app="example_app" is the name of the app
+```
+
+#### Create a template:
+```bash
+apps/
+  example_app/
+    __init__.py
+    routes.py
+    templates/
+      home.html
+    static/
 ```
