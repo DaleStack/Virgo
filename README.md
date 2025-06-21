@@ -11,6 +11,7 @@ Built for learning — inspired by Django, but simplified for clarity.
 - Dynamic Routing
 - WSGI-compatible dev server
 - Per-app templates and static files
+- Context Passing Support
 ---
 
 ## 🚀 Getting Started
