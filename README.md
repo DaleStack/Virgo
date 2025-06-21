@@ -165,6 +165,7 @@ apps/
 #### Navigate to home.html and create your template:
 
 ```HTML
+<!--example_app/templates/home.html-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
