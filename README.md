@@ -158,6 +158,6 @@ apps/
     __init__.py
     routes.py
     templates/
-      home.html
+      home.html #Your Template
     static/
 ```
