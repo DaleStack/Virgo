@@ -7,7 +7,6 @@ Built for learning — inspired by Django, but simplified for clarity.
 
 ## 📦 Features
 
-- Manual + typed routing (`<int:id>`, `<str:name>`)
 - Dynamic Routing
 - WSGI-compatible dev server
 - Per-app templates and static files
@@ -105,3 +104,10 @@ http://127.0.0.1:8000/
 ```
 
 ## Dynamic Routing
+
+#### Define a function with an extra parameter:
+```Python
+def profile_view(request, name):
+  return Response(f"This is {name}'s Profile")
+routes["/profile/<name>"] = profile_view
+```
