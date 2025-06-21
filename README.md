@@ -6,12 +6,11 @@ Built for learning — inspired by Django, but simplified for clarity.
 ---
 
 ## 📦 Features
-
+- CLI for starting new apps
+- App-based Structure
 - Dynamic Routing
 - WSGI-compatible dev server
 - Per-app templates and static files
-- CLI for starting new apps
-
 ---
 
 ## 🚀 Getting Started
