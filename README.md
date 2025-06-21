@@ -140,7 +140,7 @@ apps/
     static/
 ```
 
-#### Navigate to routes.py and create a function that will return render():
+#### Navigate to routes.py and create a function that will return a render() function:
 
 ```Python
 def example(request):
