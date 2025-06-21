@@ -111,3 +111,14 @@ def profile_view(request, name):
   return Response(f"This is {name}'s Profile")
 routes["/profile/<name>"] = profile_view
 ```
+
+#### Restart the dev server:
+```bash
+#bash
+py virgo.py lightserve
+```
+
+#### Visit:
+```bash
+http://127.0.0.1:8000/profile/JohnDoe
+```
