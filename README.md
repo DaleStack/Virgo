@@ -238,3 +238,14 @@ h1 {
 </body>
 </html>
 ```
+
+#### Re-run the dev server:
+```bash
+#bash
+py virgo.py lightserve
+```
+
+#### Visit:
+```bash
+http://127.0.0.1:8000/example
+```
