@@ -274,6 +274,23 @@ def example(request):
   name = "John Doe"
   age = 30
 
-  return render("home.html",{"name":name, "age":age}, app="example_app") 
+  return render("home.html", {"name":name, "age":age}, app="example_app") 
 routes["/example"] = example
+```
+
+### Calling context from a template:
+```HTML
+<!--example_app/templates/home.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example Template</title>
+</head>
+<body>
+  <h1>Hello my name is {{ name }}</h1>
+  <h3>I am {{ age }} years old</h3>
+</body>
+</html>
 ```
