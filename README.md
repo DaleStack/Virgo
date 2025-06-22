@@ -250,3 +250,5 @@ py virgo.py lightserve
 http://127.0.0.1:8000/example
 ```
 and you should see the styles working.
+
+## Context Passing
