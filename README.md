@@ -274,6 +274,6 @@ def example(request):
   name = "John Doe"
   age = 30
 
-  return render("home.html",{"name":name, "age":age}, app="example_app") # Context should be in the middle
+  return render("home.html",{"name":name, "age":age}, app="example_app") 
 routes["/example"] = example
 ```
