@@ -151,7 +151,7 @@ routes["/example"] = example
 # app="example_app" is the name of the app
 ```
 
-#### Create a template in your app's template folder:
+#### Create a template in your app's templates folder:
 ```bash
 apps/
   example_app/ # app="example_app" is referring to this
@@ -249,3 +249,4 @@ py virgo.py lightserve
 ```bash
 http://127.0.0.1:8000/example
 ```
+##### and you should see the styling.
