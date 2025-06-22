@@ -1,48 +1,80 @@
 from wsgiref.simple_server import make_server
-from virgo.core.routing import match_route
-from virgo.core.response import Response
 from mimetypes import guess_type
 import os
+import importlib
+from virgo.core.routing import match_route
+from virgo.core.response import Response
+from virgo.middlewares.logger import MIDDLEWARE  # Auto-loaded middlewares
 
+# --- Request Wrapper ---
 class Request:
     def __init__(self, environ):
         self.method = environ["REQUEST_METHOD"]
         self.path = environ["PATH_INFO"]
 
+# --- Static File Serving ---
+def serve_static_file(path, start_response):
+    parts = path.strip("/").split("/")
+
+    if len(parts) >= 3 and parts[0] == "static":
+        app_name = parts[1]
+        file_parts = parts[2:]
+        static_file_path = os.path.join("apps", app_name, "static", *file_parts)
+
+        if os.path.isfile(static_file_path):
+            content_type, _ = guess_type(static_file_path)
+            with open(static_file_path, "rb") as f:
+                body = f.read()
+            start_response("200 OK", [("Content-Type", content_type or "application/octet-stream")])
+            return [body]
+
+    start_response("404 Not Found", [("Content-Type", "text/plain")])
+    return [b"Static file not found"]
+
+def load_middlewares():
+    middleware_list = []
+    middleware_dir = os.path.join("virgo", "middlewares")
+
+    for filename in os.listdir(middleware_dir):
+        if filename.endswith(".py") and not filename.startswith("__"):
+            module_name = f"virgo.middlewares.{filename[:-3]}"
+            module = importlib.import_module(module_name)
+            if hasattr(module, "MIDDLEWARE"):
+                middleware_list.append(module.MIDDLEWARE)
+
+    return middleware_list
+
+MIDDLEWARES = load_middlewares()
+
+# --- Middleware Application ---
+def apply_middlewares(request, view_func, kwargs):
+    def final_handler(req):
+        return view_func(req, **kwargs)
+
+    # Chain middlewares (last applied wraps first)
+    for middleware in reversed(MIDDLEWARES):
+        final_handler = (lambda mw, nxt: lambda req: mw(req, nxt))(middleware, final_handler)
+
+    return final_handler(request)
+
+# --- WSGI Application ---
 def app(environ, start_response):
     request = Request(environ)
-    path = request.path
 
-    # Serve static files 
-    if path.startswith("/static/"):
-        parts = path.split("/")
-        if len(parts) >= 3:
-            app_name = parts[2]
-            file_parts = parts[3:]  # The rest of the path
-            static_file_path = os.path.join("apps", app_name, "static", *file_parts)
+    if request.path.startswith("/static/"):
+        return serve_static_file(request.path, start_response)
 
-            if os.path.exists(static_file_path):
-                content_type, _ = guess_type(static_file_path)
-                with open(static_file_path, "rb") as f:
-                    body = f.read()
-                start_response("200 OK", [("Content-Type", content_type or "application/octet-stream")])
-                return [body]
-
-        # If file not found
-        start_response("404 Not Found", [("Content-Type", "text/plain")])
-        return [b"Static file not found"]
-
-    # Proceed with normal routing
-    view_func, kwargs = match_route(path)
+    view_func, kwargs = match_route(request.path)
     if view_func:
-        response = view_func(request, **kwargs)
+        response = apply_middlewares(request, view_func, kwargs)
     else:
         response = Response("404 Not Found", status="404 Not Found")
 
     start_response(response.status, response.headers)
     return [response.body]
 
+# --- Development Server Entry Point ---
 def serve():
+    print("Virgo development server running at http://127.0.0.1:8000")
     with make_server('', 8000, app) as httpd:
-        print("Virgo development server running at http://127.0.0.1:8000")
         httpd.serve_forever()

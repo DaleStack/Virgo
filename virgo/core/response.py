@@ -3,3 +3,4 @@ class Response:
             self.body = body.encode("utf-8")
             self.status = status
             self.headers = [("Content-Type", content_type)]
+            self.status_code = int(status.split()[0])
