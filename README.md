@@ -151,7 +151,7 @@ routes["/example"] = example
 # app="example_app" is the name of the app
 ```
 
-#### Create a template:
+#### Create a template in your app's template folder:
 ```bash
 apps/
   example_app/ # app="example_app" is referring to this
@@ -198,7 +198,7 @@ http://127.0.0.1:8000/example
 
 ## Static File
 
-#### Create a stylesheet:
+#### Create a stylesheet in your app's static folder:
 ```bash
 apps/
   example_app/ 
