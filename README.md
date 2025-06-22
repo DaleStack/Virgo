@@ -252,3 +252,18 @@ http://127.0.0.1:8000/example
 and you should see the styles working.
 
 ## Context Passing
+
+### There are two ways to pass a context:
+
+#### First:
+```Python
+def example(request):
+
+  context = {
+    "name":"John Doe"
+    "age": 30
+  }
+
+  return render("home.html", context, app="example_app") # Context should be in the middle
+routes["/example"] = example
+```
