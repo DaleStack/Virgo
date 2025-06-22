@@ -253,7 +253,7 @@ and you should see the styles working.
 
 ## Context Passing
 
-### There are two ways to pass a context:
+### There are TWO ways to pass a context:
 
 #### First:
 ```Python
@@ -265,5 +265,15 @@ def example(request):
   }
 
   return render("home.html", context, app="example_app") # Context should be in the middle
+routes["/example"] = example
+```
+
+#### Second:
+```Python
+def example(request):
+  name = "John Doe"
+  age = 30
+
+  return render("home.html",{"name":name, "age":age}, app="example_app") # Context should be in the middle
 routes["/example"] = example
 ```
