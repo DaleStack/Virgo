@@ -230,7 +230,8 @@ h1 {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Example Template</title>
-  <link rel="stylesheet" href="static/example_app/style.css"></link> <!-- This is how you should import (static/<app_name>/<stylesheet name>) -->
+  <link rel="stylesheet" href="static/example_app/style.css"></link> 
+  <!-- This is how you should link: static/<app_name>/<stylesheet name> -->
 </head>
 <body>
   <h1>This is my template</h1>
