@@ -195,3 +195,45 @@ py virgo.py lightserve
 ```bash
 http://127.0.0.1:8000/example
 ```
+
+## Static File
+
+#### Create a stylesheet:
+```bash
+apps/
+  example_app/ 
+    __init__.py
+    routes.py
+    templates/
+      home.html 
+    static/ 
+      style.css # Your stylesheet
+```
+
+#### Add style:
+```CSS
+/** example_app/static/style.css */
+
+h1 {
+  background-color: chocolate;
+}
+
+```
+
+#### Go back to your template and link your stylesheet:
+
+```HTML
+<!--example_app/templates/home.html-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Example Template</title>
+  <link rel="stylesheet" href="static/example_app/style.css"></link> <!-- This is how you should import (static/<app_name>/<stylesheet name>) -->
+</head>
+<body>
+  <h1>This is my template</h1>
+</body>
+</html>
+```
