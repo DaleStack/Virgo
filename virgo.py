@@ -1,7 +1,8 @@
 import sys
 import os
 from virgo.core.lightserver import serve
-from create_tables import run_migrations  # 👈 Import migration logic
+from create_tables import run_migrations  
+import apps.blog.routes
 
 def ensure_db():
     """Create an empty SQLite database if not already present."""
@@ -42,6 +43,7 @@ routes["/sample"] = sample
     with open(os.path.join(project_path, "models.py"), "w", encoding="utf-8") as f:
         f.write('''from sqlalchemy import Column, Integer, String
 from virgo.core.database import Base
+from virgo.core.mixins import BaseModelMixin
 ''')
 
     print(f"✅ App '{project_name}' created at '{project_path}'.")

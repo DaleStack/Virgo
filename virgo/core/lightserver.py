@@ -4,13 +4,42 @@ import os
 import importlib
 from virgo.core.routing import match_route
 from virgo.core.response import Response
-from virgo.middlewares.logger import MIDDLEWARE  # Auto-loaded middlewares
+from virgo.middlewares.logger import MIDDLEWARE
+from urllib.parse import parse_qs
+import json
 
-# --- Request Wrapper ---
 class Request:
     def __init__(self, environ):
         self.method = environ["REQUEST_METHOD"]
         self.path = environ["PATH_INFO"]
+        self.environ = environ
+
+        # Parse query parameters from URL
+        self.GET = {k: v[0] if len(v) == 1 else v for k, v in parse_qs(environ.get("QUERY_STRING", "")).items()}
+
+        # Prepare body
+        self.body = b""
+        self.POST = {}
+
+        if self.method == "POST":
+            try:
+                content_length = int(environ.get("CONTENT_LENGTH") or 0)
+                if content_length > 0:
+                    self.body = environ["wsgi.input"].read(content_length)
+            except (ValueError, TypeError):
+                self.body = b""
+
+            # Parse form data (application/x-www-form-urlencoded)
+            content_type = environ.get("CONTENT_TYPE", "")
+            if "application/x-www-form-urlencoded" in content_type:
+                parsed = parse_qs(self.body.decode())
+                self.POST = {k: v[0] if len(v) == 1 else v for k, v in parsed.items()}
+
+    def json(self):
+        try:
+            return json.loads(self.body.decode())
+        except Exception:
+            return {}
 
 # --- Static File Serving ---
 def serve_static_file(path, start_response):
