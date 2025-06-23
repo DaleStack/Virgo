@@ -1,0 +1,11 @@
+**FEATURES**
+
+- WSGI-compatible dev server ✔
+- CLI for starting new apps ✔
+- App-based Structure ✔
+- Dynamic Routing ✔
+- Per-app templates and static files ✔
+- Context Passing Support ✔
+- Logger Middleware ✔
+- Integrate ORM using SQLAlchemy ✔
+- Authentication Middleware ❌
