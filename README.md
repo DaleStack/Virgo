@@ -12,7 +12,7 @@ Built for learning — inspired by Django, but simplified for clarity.
 - Dynamic Routing
 - Per-app templates and static files
 - Context Passing Support
-- SQLAlchemy-powered models
+- SQLAlchemy-powered database/models
 ---
 
 ## 🚀 Getting Started
