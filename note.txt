@@ -7,5 +7,5 @@
 - Per-app templates and static files ✔
 - Context Passing Support ✔
 - Logger Middleware ✔
-- Integrate ORM using SQLAlchemy ✔
+- Integrate ORM using SQLAlchemy with Query Helpers✔
 - Authentication Middleware ❌
