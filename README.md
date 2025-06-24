@@ -7,12 +7,15 @@ Built for learning — inspired by Django, but simplified for clarity.
 
 ## 📦 Features
 - WSGI-compatible dev server
+- Gunicorn(Linux/MacOS) and Waitress(Windows) Ready
 - CLI for starting new apps
 - App-based Structure
 - Dynamic Routing
 - Per-app templates and static files
+- Jinja2-powered Templating engine
 - Context Passing Support
 - SQLAlchemy-powered ORM
+- Query Helper
 ---
 
 ## 🚀 Getting Started
