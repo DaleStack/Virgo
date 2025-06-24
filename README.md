@@ -306,9 +306,12 @@ routes["/example"] = example
 
 ## Database
 
+### Model
+
 #### Creating a Model:
 Inside your app's models.py, create a simple model:
 ```Python
+# apps/post/models.py
 from sqlalchemy import Column, Integer, String
 from virgo.core.database import Base
 from virgo.core.mixins import BaseModelMixin
@@ -328,3 +331,18 @@ py virgo.py lightmigrate
 This command migrates of all the model and automatically creates a table.
 
 You should see a virgo.db created (project-level).
+
+### Using the Model
+
+#### Listing:
+```Python
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from .models import Post # import your model
+
+def post_list(request):
+  posts = Post.all()
+  return render("post_list.html", {"posts":posts}, app=post)
+routes["/"] = post_list
+```
