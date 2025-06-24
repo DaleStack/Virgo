@@ -10,7 +10,7 @@ def ensure_db():
         import sqlite3
         conn = sqlite3.connect("virgo.db")
         conn.close()
-        print("🆕 Created empty virgo.db.")
+        print("Created empty virgo.db.")
 
 def start_project(project_name):
     """Scaffold a new Virgo app."""
@@ -47,7 +47,7 @@ from virgo.core.database import Base
 from virgo.core.mixins import BaseModelMixin
 ''')
 
-    print(f"✅ App '{project_name}' created at '{project_path}'.")
+    print(f"App '{project_name}' created at '{project_path}'.")
 
 def show_help():
     print("⚙ Available commands:")
