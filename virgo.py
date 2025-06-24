@@ -54,6 +54,29 @@ def show_help():
     print("  py virgo.py lightstart <project_name>   Create a new app inside 'apps/'")
     print("  py virgo.py lightserve                  Run the development server")
     print("  py virgo.py lightmigrate                Create tables for all models")
+    print("  py virgo.py q-help                      Show all query helpers")
+
+def show_query_help():
+    print("⚙ Available Query Helpers")
+    print("")
+    print("CREATE:")
+    print("  Model.create(**kwargs)        → Create a new record")
+    print("")
+    print("READ:")
+    print("  Model.all()                   → Get all records")
+    print("  Model.get(id) / get_by_id(id) → Get one record by ID")
+    print("  Model.filter_by(**kwargs)     → Get matching records")
+    print("  Model.first_by(**kwargs)      → Get the first matching record")
+    print("")
+    print("UPDATE:")
+    print("  instance.update(**kwargs)     → Update fields of an existing object")
+    print("")
+    print("DELETE:")
+    print("  instance.delete()             → Delete an object")
+    print("")
+    print("OTHER:")
+    print("  Model.count()                 → Count all records")
+    print("  Model.count(field=value)      → Count records with match")
 
 if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else ""
@@ -61,6 +84,8 @@ if __name__ == "__main__":
     if command == "lightserve":
         ensure_db()
         serve()
+    elif command == "q-help":
+        show_query_help()
     elif command == "lightstart":
         if len(sys.argv) < 3:
             print("⚠ Usage: py virgo.py lightstart <project_name>")
