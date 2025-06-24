@@ -30,8 +30,9 @@ def start_project(project_name):
     # Create routes.py
     with open(os.path.join(project_path, "routes.py"), "w", encoding="utf-8") as f:
         f.write(f'''from virgo.core.routing import routes
-from virgo.core.response import Response
+from virgo.core.response import Response, redirect
 from virgo.core.template import render
+
 
 def sample(request):
     return Response("Welcome to Virgo!")

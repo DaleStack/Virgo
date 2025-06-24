@@ -37,6 +37,11 @@ class BaseModelMixin:
         obj = session.get(cls, id)
         session.close()
         return obj
+    
+    # GET BY ID WRAPPER
+    @classmethod
+    def get(cls, id):
+        return cls.get_by_id(id)
 
     # ALL
     @classmethod
@@ -72,3 +77,6 @@ class BaseModelMixin:
             total = session.query(cls).count()
         session.close()
         return total
+    
+    
+
