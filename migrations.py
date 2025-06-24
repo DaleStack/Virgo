@@ -1,5 +1,3 @@
-# create_tables.py
-
 from virgo.core.database import Base, engine
 import importlib
 import os
