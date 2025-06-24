@@ -324,3 +324,5 @@ class Post(Base, BaseModelMixin):
 ```bash
 py virgo.py lightmigrate
 ```
+
+You should see a virgo.db created (project-level).
