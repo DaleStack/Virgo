@@ -1,6 +1,6 @@
 **FEATURES**
 
-- WSGI-compatible dev server ✔
+- WSGI-compatible dev server (Powered by Waitress(Windows) and Gunicorn(Other Systems))✔
 - CLI for starting new apps ✔
 - App-based Structure ✔
 - Dynamic Routing ✔
@@ -8,5 +8,5 @@
 - Context Passing Support ✔
 - Logger Middleware ✔
 - Integrate ORM using SQLAlchemy with Query Helpers ✔
-- Integrate Jinja2 for templating engine
+- Integrate Jinja2 for templating engine ✔
 - Authentication Middleware ❌
