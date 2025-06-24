@@ -305,3 +305,17 @@ routes["/example"] = example
 
 ## Database
 
+#### Creating a Model:
+Inside your app's models.py, create a simple model:
+```Python
+from sqlalchemy import Column, Integer, String
+from virgo.core.database import Base
+from virgo.core.mixins import BaseModelMixin
+
+class Post(Base, BaseModelMixin):
+  __tablename__ = "posts"
+
+  id = Column(Integer, primary_key=True, index=True)
+  title = Column(String)
+  content = Column(String)
+```
