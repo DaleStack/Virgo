@@ -7,6 +7,7 @@ from virgo.core.response import Response
 from virgo.middlewares.logger import MIDDLEWARE
 from urllib.parse import parse_qs
 import json
+import platform
 
 class Request:
     def __init__(self, environ):
@@ -104,6 +105,31 @@ def app(environ, start_response):
 
 # --- Development Server Entry Point ---
 def serve():
+    if platform.system() == "Windows":
+        try:
+            from waitress import serve as waitress_serve
+            print("Running Virgo with Waitress at http://127.0.0.1:8000")
+            waitress_serve(app, host='127.0.0.1', port=8000)
+        except ImportError:
+            print("Waitress not found. Falling back to Virgo dev server.")
+    else:
+        try:
+            import gunicorn.app.base
+
+            class VirgoApp(gunicorn.app.base.BaseApplication):
+                def load_config(self):
+                    self.cfg.set("bind", "127.0.0.1:8000")
+
+                def load(self):
+                    return app
+
+            print("Running Virgo with Gunicorn at http://127.0.0.1:8000")
+            VirgoApp().run()
+            return
+        except ImportError:
+            print("Gunicorn not found. Falling back to Virgo dev server.")
+
+    from wsgiref.simple_server import make_server
     print("Virgo development server running at http://127.0.0.1:8000")
     with make_server('', 8000, app) as httpd:
         httpd.serve_forever()
