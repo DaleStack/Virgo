@@ -315,7 +315,12 @@ from virgo.core.mixins import BaseModelMixin
 class Post(Base, BaseModelMixin):
   __tablename__ = "posts"
 
-  id = Column(Integer, primary_key=True, index=True)
+  id = Column(Integer, primary_key=True)
   title = Column(String)
   content = Column(String)
+```
+
+#### Run migrate:
+```bash
+py virgo.py lightmigrate
 ```
