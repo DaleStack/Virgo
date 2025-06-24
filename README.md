@@ -14,6 +14,7 @@ Built for learning — inspired by Django, but simplified for clarity.
 - Per-app templates and static files
 - Jinja2-powered Templating engine
 - Context Passing Support
+- SQLite Database
 - SQLAlchemy-powered ORM
 - Query Helper
 ---
