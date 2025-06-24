@@ -33,6 +33,7 @@ py virgo.py lightstart blog
 apps/
   blog/
     __init__.py
+    models.py
     routes.py
     templates/
     static/
@@ -139,6 +140,7 @@ This is JohnDoe's Profile
 apps/
   example_app/
     __init__.py
+    models.py
     routes.py
     templates/
     static/
@@ -160,6 +162,7 @@ routes["/example"] = example
 apps/
   example_app/ # app="example_app" is referring to this
     __init__.py
+    models.py
     routes.py
     templates/
       home.html #Your Template
@@ -207,6 +210,7 @@ http://127.0.0.1:8000/example
 apps/
   example_app/ 
     __init__.py
+    models.py
     routes.py
     templates/
       home.html 
@@ -298,3 +302,6 @@ routes["/example"] = example
 </body>
 </html>
 ```
+
+## Database
+
