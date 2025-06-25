@@ -419,8 +419,21 @@ def post_update(request, id):
     # .update() is used for updating a data in the model
     return redirect("/")
 
-  return render("post_list.html", {"posts":posts}, app=post)
+  return render("post_update.html", {"post":post}, app=post)
 routes["/update/<id>"] = post_update
+```
+
+Creating data in the template:
+
+```HTML
+<!-- apps/post/templates/post_update.html -->
+<h1>Update Post</h1>
+
+<form method="POST"> <!-- it should be a POST method -->
+  <input type="text" name="title" value="{{ post.title }}"/>
+  <textarea name="content" placeholder="Content">{{ post.content }}</textarea>
+  <button type="submit">Update Post</button>
+</form>
 ```
 
 
