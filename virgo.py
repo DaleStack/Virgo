@@ -100,5 +100,4 @@ if __name__ == "__main__":
         ensure_db()
         run_migrations()
     else:
-        print("List of commands.\n")
         show_help()
