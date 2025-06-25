@@ -44,7 +44,7 @@ apps/
 ```Python
 #apps/blog/routes.py
 from virgo.core.routing import routes
-from virgo.core.response import Response
+from virgo.core.response import Response, redirect
 from virgo.core.template import render
 
 def sample(request):
@@ -77,7 +77,7 @@ http://127.0.0.1:8000/sample
 ```Python
 #apps/blog/routes.py
 from virgo.core.routing import routes
-from virgo.core.response import Response
+from virgo.core.response import Response, redirect
 from virgo.core.template import render
 
 def sample(request):
@@ -423,7 +423,7 @@ def post_update(request, id):
 routes["/update/<id>"] = post_update
 ```
 
-Creating data in the template:
+Updating data in the template:
 
 ```HTML
 <!-- apps/post/templates/post_update.html -->
