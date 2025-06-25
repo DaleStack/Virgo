@@ -396,4 +396,29 @@ Looping through the data in the template:
 {% endfor %}
 ```
 
+#### Updating:
+```Python
+# apps/post/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from .models import Post 
+
+def post_update(request, id):
+  post = Post.get(id)
+
+  if not post:
+    return Response("Post not found", status=404)
+  
+  if request.method == "POST":
+    data = request.POST
+    title = data.get("title")
+    content = data.get("cpntent")
+    post.update(title=title, content=content)
+    return redirect("/")
+
+  return render("post_list.html", {"posts":posts}, app=post)
+routes["/update/<id>"] = post_update
+```
+
 
