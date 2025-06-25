@@ -330,7 +330,7 @@ py virgo.py lightmigrate
 ```
 This command migrates of all the model and automatically creates a table.
 
-You should see a virgo.db created (project-level).
+You should see a virgo.db created at a project-level. (If not created yet)
 
 ### Using the Model
 
