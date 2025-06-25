@@ -334,40 +334,13 @@ You should see a **virgo.db** created at a project-level. (If it does not exist 
 
 ### Using the Model
 
-#### Listing:
-```Python
-# apps/post/routes.py
-from virgo.core.routing import routes
-from virgo.core.response import Response, redirect
-from virgo.core.template import render
-from .models import Post # import your model
-
-def post_list(request):
-  posts = Post.all() 
-  # .all() is used to fetch all the data in the model
-  return render("post_list.html", {"posts":posts}, app=post)
-routes["/"] = post_list
-```
-
-Looping through the data in the template:
-
-```HTML
-<!-- apps/post/templates/post_list.html -->
-<h1>Post List</h1>
-
-{% for post in posts %}
-  <p>{{ post.title }}</p>
-  <p>{{ post.content }}</p>
-{% endfor %}
-```
-
 #### Creating:
 ```Python
 # apps/post/routes.py
 from virgo.core.routing import routes
 from virgo.core.response import Response, redirect
 from virgo.core.template import render
-from .models import Post 
+from .models import Post # import your model
 
 def post_create(request):
   if request.method == "POST":
@@ -395,3 +368,32 @@ Creating data in the template:
   <button type="submit">Create Post</button>
 </form>
 ```
+
+#### Reading/Listing:
+```Python
+# apps/post/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from .models import Post 
+
+def post_list(request):
+  posts = Post.all() 
+  # .all() is used to fetch all the data in the model
+  return render("post_list.html", {"posts":posts}, app=post)
+routes["/"] = post_list
+```
+
+Looping through the data in the template:
+
+```HTML
+<!-- apps/post/templates/post_list.html -->
+<h1>Post List</h1>
+
+{% for post in posts %}
+  <p>{{ post.title }}</p>
+  <p>{{ post.content }}</p>
+{% endfor %}
+```
+
+
