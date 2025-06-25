@@ -56,7 +56,7 @@ def show_help():
     print("  py virgo.py lightserve                  Run the development server")
     print("  py virgo.py lightmigrate                Create tables for all models")
     print("  py virgo.py q-help                      Show all query helpers")
-    print("  py virgo.py version                     Show version")
+    print("  py virgo.py version                     Show Virgo version")
 
 def show_query_help():
     print("⚙ Available Query Helpers")
