@@ -3,6 +3,7 @@ import os
 from virgo.core.lightserver import serve
 from migrations import run_migrations  
 import apps.post.routes
+from version import __version__
 
 def ensure_db():
     """Create an empty SQLite database if not already present."""
@@ -55,6 +56,7 @@ def show_help():
     print("  py virgo.py lightserve                  Run the development server")
     print("  py virgo.py lightmigrate                Create tables for all models")
     print("  py virgo.py q-help                      Show all query helpers")
+    print("  py virgo.py version                     Show version")
 
 def show_query_help():
     print("⚙ Available Query Helpers")
@@ -86,6 +88,8 @@ if __name__ == "__main__":
         serve()
     elif command == "q-help":
         show_query_help()
+    elif command == "version":
+        print(f"Virgo v{__version__}")
     elif command == "lightstart":
         if len(sys.argv) < 3:
             print("⚠ Usage: py virgo.py lightstart <project_name>")
