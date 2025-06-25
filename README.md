@@ -354,7 +354,7 @@ routes["/"] = post_list
 <h1>Post List</h1>
 
 {% for post in posts %}
-<p>{{ post.title }}</p>
-<p>{{ post.content }}</p>
+  <p>{{ post.title }}</p>
+  <p>{{ post.content }}</p>
 {% endfor %}
 ```
