@@ -348,7 +348,7 @@ def post_list(request):
 routes["/"] = post_list
 ```
 
-#### Looping through the data in the template:
+##### Looping through the data in the template:
 ```HTML
 <!-- apps/post/templates/post_list.html -->
 <h1>Post List</h1>
