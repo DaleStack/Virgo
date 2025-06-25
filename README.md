@@ -350,6 +350,7 @@ routes["/"] = post_list
 
 #### Looping through the data in the template:
 ```HTML
+<!-- apps/post/templates/post_list.html -->
 <h1>Post List</h1>
 
 {% for post in posts %}
