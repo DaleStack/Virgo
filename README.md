@@ -343,12 +343,14 @@ from virgo.core.template import render
 from .models import Post # import your model
 
 def post_list(request):
-  posts = Post.all() # .all() is used to fetch all the data in the model
+  posts = Post.all() 
+  # .all() is used to fetch all the data in the model
   return render("post_list.html", {"posts":posts}, app=post)
 routes["/"] = post_list
 ```
 
-##### Looping through the data in the template:
+Looping through the data in the template:
+
 ```HTML
 <!-- apps/post/templates/post_list.html -->
 <h1>Post List</h1>
@@ -357,4 +359,39 @@ routes["/"] = post_list
   <p>{{ post.title }}</p>
   <p>{{ post.content }}</p>
 {% endfor %}
+```
+
+#### Creating:
+```Python
+# apps/post/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from .models import Post 
+
+def post_create(request):
+  if request.method == "POST":
+    data = request.POST
+    title = data.get("title")
+    content = data.get("content")
+
+    Post.create(title=title, content=content)
+    # .create() is used to create a data in the model
+    return redirect("/") # Go back to post list
+    
+  return render("post_create.html", app=post)
+routes["/create"] = post_create
+```
+
+Creating data in the template:
+
+```HTML
+<!-- apps/post/templates/post_create.html -->
+<h1>Create Post</h1>
+
+<form method="POST"> <!-- it should be a POST method -->
+  <input type="text" name="title" placeholder="Title"/>
+  <textarea name="content" placeholder="Content"></textarea>
+  <button type="submit">Create Post</button>
+</form>
 ```
