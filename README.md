@@ -343,7 +343,17 @@ from virgo.core.template import render
 from .models import Post # import your model
 
 def post_list(request):
-  posts = Post.all()
+  posts = Post.all() # .all() is used to fetch all the data in the model
   return render("post_list.html", {"posts":posts}, app=post)
 routes["/"] = post_list
+```
+
+#### Looping through the data in the template:
+```HTML
+<h1>Post List</h1>
+
+{% for post in posts %}
+<p>{{ post.title }}</p>
+<p>{{ post.content }}</p>
+{% endfor %}
 ```
