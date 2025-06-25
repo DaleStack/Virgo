@@ -350,7 +350,7 @@ def post_create(request):
 
     Post.create(title=title, content=content)
     # .create() is used to create a data in the model
-    return redirect("/") # Go back to post list
+    return redirect("/") # Go back to post list after submitting
     
   return render("post_create.html", app=post)
 routes["/create"] = post_create
