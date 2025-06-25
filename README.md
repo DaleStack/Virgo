@@ -415,6 +415,8 @@ def post_update(request, id):
     title = data.get("title")
     content = data.get("cpntent")
     post.update(title=title, content=content)
+    # post is the instance
+    # .update() is used for updating a data in the model
     return redirect("/")
 
   return render("post_list.html", {"posts":posts}, app=post)
