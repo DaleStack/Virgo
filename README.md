@@ -458,4 +458,18 @@ def post_delete(request, id):
 routes["/delete/<id>"] = post_delete
 ```
 
+Using the functon in the template:
+
+```HTML
+<!-- apps/post/templates/post_list.html -->
+<h1>Post List</h1>
+
+{% for post in posts %}
+  <p>{{ post.title }}</p>
+  <p>{{ post.content }}</p>
+  <a href="/delete/{{ post.id }}">Delete</a> <!-- Deleting -->
+  <a href="/update/{{ post.id }}">Edit</a>
+{% endfor %}
+```
+
 
