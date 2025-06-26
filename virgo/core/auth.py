@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String
 from virgo.core.database import Base
 from virgo.core.mixins import BaseModelMixin
-from virgo.core.session import create_session
+from virgo.core.session import create_session, get_session
 from virgo.core.response import Response, redirect
 from settings import LOGIN_REDIRECT_ROUTE
 import bcrypt
@@ -41,3 +41,22 @@ class UserModel(Base, BaseModelMixin):
 
         hashed = cls.hash_password(password)
         return cls.create(username=username, password=hashed)
+    
+def get_user(request, UserModel):
+    cookie = request.environ.get("HTTP_COOKIE", "")
+    session_id = None
+
+    for part in cookie.split(";"):
+        if part.strip().startswith("session_id="):
+            session_id = part.strip().split("=")[1]
+            break
+
+    if not session_id:
+        return None
+
+    session_data = get_session(session_id)
+    if not session_data:
+        return None
+
+    user_id = session_data.get("user_id")
+    return UserModel.get(user_id)
