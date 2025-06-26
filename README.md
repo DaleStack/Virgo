@@ -436,4 +436,26 @@ Updating data in the template:
 </form>
 ```
 
+#### Deleting:
+```Python
+# apps/post/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from .models import Post 
+
+def post_delete(request, id):
+  post = Post.get(id)
+
+  if not post:
+    return Response("Post not found", status=404)
+  
+  post.delete() 
+  # .delete() is used to remove an instance in the database
+  return redirect("/")
+
+  return render("post_delete.html", app=post)
+routes["/delete/<id>"] = post_delete
+```
+
 
