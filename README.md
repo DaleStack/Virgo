@@ -472,6 +472,27 @@ Using the functon in the template:
 {% endfor %}
 ```
 
-## Database
+## Authentication
+
+### Built-in UserModel
+
+#### Creating a User model:
+```Python
+# apps/user/models.py
+from sqlalchemy import Column, Integer, String
+from virgo.core.database import Base
+from virgo.core.mixins import BaseModelMixin
+from virgo.core.auth import UserModel # import built-in User Model
+
+class User(UserModel):
+  pass
+```
+
+Run migrate in terminal:
+```bash
+py virgo.py lightmigrate
+```
+
+
 
 
