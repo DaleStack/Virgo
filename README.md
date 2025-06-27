@@ -520,17 +520,58 @@ def register_view(request):
 routes["/register"] = register_view
 ```
 
-#### Registration template view:
+Registration template view:
 ```HTML
 <!-- apps/user/templates/register.html -->
 <h1>Register User</h1>
+{% if error %}
+  <p style="color: red;">{{ error }}</p>
+{% endif %}
 <form action="" method="POST">
-    {% if error %}
-        <p style="color: red;">{{ error }}</p>
-    {% endif %}
     <input type="text" name="username" placeholder="username">
     <input type="password" name="password" placeholder="password">
     <button type="submit">Register</button>
+</form>
+```
+
+#### Login as a User:
+```Python
+# apps/user/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from virgo.core.auth import UserAlreadyExists 
+from .models import User 
+
+def login_view(request):
+  if request.method == "POST":
+    data = request.POST
+    username = data.get("username")
+    password = data.get("password")
+
+    user = User.first_by(username=username)
+    if not user or not user.check_password(password):
+      error = "Invalid username or password"
+      return render("login.html", {"error":error}, app="user")
+    
+    return User.authenticate(request, username, password)
+    
+
+  return render("login.html", app="user")
+routes["/login"] = login_view
+```
+
+Login template view:
+```HTML
+<!-- apps/user/templates/login.html -->
+<h1>Login User</h1>
+{% if error %}
+  <p style="color: red;">{{ error }}</p>
+{% endif %}
+<form action="" method="POST">
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <button type="submit">Login</button>
 </form>
 ```
 
