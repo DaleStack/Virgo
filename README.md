@@ -580,6 +580,7 @@ Login template view:
 Open up your settings.py:
 ```Python
 # settings.py
+
 LOGIN_REDIRECT_ROUTE="/example" 
 # Usage: What /<route> do you want users to be redirected to, after authenticating
 
@@ -590,6 +591,25 @@ LOGIN_ROUTE="/login" # This is your login page route
 LOGOUT_REDIRECT_ROUTE="/" 
 # Used for redirecting users after logging out 
 ```
+
+#### Protected routes:
+```Python
+# apps/user/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from virgo.core.auth import UserAlreadyExists 
+from .models import User 
+from virgo.core.decorators import login_required # import this login_required decorator
+
+@login_required(User) # pass your user model as the parameter
+def dashboard(request):
+  user = request.user # request.user is used to fetch the currently logged-in user
+
+  return render("dashboard.html", {"user":user}, app="user")
+routes["/dashboard"] = dashboard
+```
+
 
 
 
