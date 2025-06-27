@@ -1,12 +1,11 @@
-LOGIN_REDIRECT_ROUTE="/dashboard"
+LOGIN_REDIRECT_ROUTE=""
 
-LOGIN_ROUTE="/login"
+LOGIN_ROUTE=""
 
-LOGOUT_REDIRECT_ROUTE="/"
+LOGOUT_REDIRECT_ROUTE=""
 
-FORBIDDEN_REDIRECT_ROUTE = "/forbidden"
+FORBIDDEN_REDIRECT_ROUTE = ""
 
 ROLE_ROUTES = {
-    "student": "/student/dashboard",
-    "teacher": "/teacher/dashboard",
+
 }

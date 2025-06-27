@@ -2,7 +2,6 @@ import sys
 import os
 from virgo.core.lightserver import serve
 from migrations import run_migrations  
-import apps.post.routes
 from version import __version__
 
 def ensure_db():
