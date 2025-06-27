@@ -575,6 +575,21 @@ Login template view:
 </form>
 ```
 
+#### Redirecting after authentication:
+
+Open up your settings.py:
+```Python
+LOGIN_REDIRECT_ROUTE="/example" 
+# Usage: What /<route> do you want users to be redirected to, after authenticating
+
+LOGIN_ROUTE="/login" # This is your login page route
+# This will be used for redirecting users who are unauthorized and accessing protected routes
+# We'll get back to this in a minute...
+
+LOGOUT_REDIRECT_ROUTE="/" 
+# Used for redirecting users after logging out 
+```
+
 
 
 
