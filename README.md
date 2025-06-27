@@ -526,7 +526,7 @@ routes["/register"] = register_view
 <h1>Register User</h1>
 <form action="" method="POST">
     {% if error %}
-        <p>{{ error }}</p>
+        <p style="color: red;">{{ error }}</p>
     {% endif %}
     <input type="text" name="username" placeholder="username">
     <input type="password" name="password" placeholder="password">
