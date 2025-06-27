@@ -618,7 +618,7 @@ Dashboard template view:
 
 This is also where **LOGIN_ROUTE** comes to play:
 
-If a user who is not logged-in tries to access "/dashboard" (a protected route)
+If a user who is not logged-in tries to access "/dashboard" (a protected route),
 They will be redirected to the login page, preventing them from accessing protected data
 
 
