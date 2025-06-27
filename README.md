@@ -621,6 +621,25 @@ This is also where **LOGIN_ROUTE** comes to play:
 If a user who is not logged-in tries to access "/dashboard" (a protected route),
 They will be redirected to the login page, preventing them from accessing protected data.
 
+#### Logout:
+```Python
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from virgo.core.auth import UserAlreadyExists 
+from .models import User 
+from virgo.core.decorators import login_required
+
+@login_required(User)
+def logout_view(request):
+  user = request.user 
+
+  if user:
+    return user.logout(request) # .logout is used to clear session
+    # LOGOUT_REDIRECT_ROUTE will be executed upon logout
+routes["/logout"] = logout_view
+```
+
 
 
 
