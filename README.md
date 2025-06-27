@@ -520,6 +520,19 @@ def register_view(request):
 routes["/register"] = register_view
 ```
 
+#### Registration template view:
+```HTML
+<h1>Register User</h1>
+<form action="" method="POST">
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <button type="submit">Register</button>
+</form>
+```
+
 
 
 
