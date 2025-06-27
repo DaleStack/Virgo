@@ -579,6 +579,7 @@ Login template view:
 
 Open up your settings.py:
 ```Python
+# settings.py
 LOGIN_REDIRECT_ROUTE="/example" 
 # Usage: What /<route> do you want users to be redirected to, after authenticating
 
