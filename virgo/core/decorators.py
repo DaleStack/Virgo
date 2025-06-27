@@ -16,9 +16,10 @@ def login_required(UserModel):
 def role_required(role):
     def decorator(view_func):
         def wrapper(request, *args, **kwargs):
-            user = get_user(request)
+            user = getattr(request, "user", None)
             if not user or getattr(user, "role", None) != role:
                 return redirect(FORBIDDEN_REDIRECT_ROUTE)
             return view_func(request, *args, **kwargs)
         return wrapper
     return decorator
+

@@ -648,6 +648,134 @@ Dashboard template view:
 <a href="/logout">Logout</a>
 ```
 
+### Role-based Routing
+
+#### Modifying the UserModel:
+Go to virgo/core/auth.py
+```Python
+# virgo/core/auth.py
+class UserModel(Base, BaseModelMixin):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+    role = Column(String, nullable=False, default="student") # add a role column eg. student or teacher
+    # make sure it's also called exactly "role" because virgo has a built-in decorator
+```
+
+Run migrate:
+```bash
+py virgo.py lightmigrate
+```
+
+For role to be accepted in registration:
+
+```Python
+# virgo/core/auth.py
+@classmethod
+    def register(cls, username, password, role): # pass the role as a parameter
+        if cls.first_by(username=username):
+            raise UserAlreadyExists("Username already taken")
+
+        hashed = cls.hash_password(password)
+        return cls.create(username=username, password=hashed, role=role) # also pass here for the role to be created
+```
+
+#### Register role-based model:
+```Python
+# apps/user/routes.py
+def register_view(request):
+    if request.method == "POST":
+        data = request.POST
+        username = data.get("username")
+        password = data.get("password")
+        role = data.get("role")
+
+        try:
+            user = User.register(username, password, role)
+            return User.authenticate(request, username, password)
+        except UserAlreadyExists:
+            error = "Username already taken"
+            return render("register.html", {"error": error}, app="post")
+        
+    return render("register.html", app="post")
+routes["/register"] = register_view
+```
+
+#### Register role-based template:
+```HTML
+<h1>Register User</h1>
+<form action="" method="POST">
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+    <input type="text" name="username" placeholder="username">
+    <input type="password" name="password" placeholder="password">
+    <select name="role" id="">
+        <option value="student">Student</option>
+        <option value="teacher">Teacher</option>
+    </select>
+    <button type="submit">Register</button>
+</form>
+```
+
+If there are two or more roles, how can I get the LOGIN_REDIRECT_ROUTE to work if it only takes 1 route? you may ask. Here's how:
+```Python
+# settings.py
+
+LOGIN_REDIRECT_ROUTE="/dashboard" 
+
+LOGIN_ROUTE="/login"
+
+LOGOUT_REDIRECT_ROUTE="/" 
+
+# Virgo has this
+ROLE_ROUTES = {
+  "student": "/student/dashboard", # role first, then route
+  "teacher": "/teacher/dashboard"
+}
+
+# If your system have no roles, leave ROLE_ROUTES empty, your fall back will be LOGIN_REDIRECT_ROUTE
+
+FORBIDDEN_REDIRECT_ROUTE="/forbidden"
+# This will be your role checker fall back, if a student tried to access "/teacher/dashboard" (vice versa)
+# They will be redirected to this route
+
+```
+
+#### Role-based function:
+```Python
+# apps/user/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from virgo.core.auth import UserAlreadyExists 
+from .models import User 
+from virgo.core.decorators import login_required, role_required # import role_required from decorators
+
+@login_required(User)
+@role_required("student")
+def student_dashboard(request):
+  user = request.user
+
+  return render("student_dashboard.html", {"user":user}, app="user")
+routes["/student/dashboard"] = student_dashboard # route should be the same as the one in the ROLE_ROUTES
+
+@login_required(User)
+@role_required("teacher")
+def teacher_dashboard(request):
+  user = request.user
+
+  return render("teacher_dashboard.html", {"user":user}, app="user")
+routes["/teacher/dashboard"] = teacher_dashboard 
+
+def forbidden(request):
+  return render("forbidden.html", app="user")
+routes["/forbidden"] = forbidden # this will be your FORBIDDEN_REDIRECT_ROUTE
+
+```
+
 
 
 

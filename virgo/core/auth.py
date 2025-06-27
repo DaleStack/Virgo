@@ -3,7 +3,7 @@ from virgo.core.database import Base
 from virgo.core.mixins import BaseModelMixin
 from virgo.core.session import create_session, get_session, destroy_session
 from virgo.core.response import Response, redirect
-from settings import LOGIN_REDIRECT_ROUTE, LOGOUT_REDIRECT_ROUTE
+from settings import LOGIN_REDIRECT_ROUTE, LOGOUT_REDIRECT_ROUTE, ROLE_ROUTES
 import bcrypt
 
 class UserAlreadyExists(Exception):
@@ -15,6 +15,7 @@ class UserModel(Base, BaseModelMixin):
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
+
 
     def check_password(self, raw_password):
         return bcrypt.checkpw(raw_password.encode(), self.password.encode())
@@ -29,7 +30,10 @@ class UserModel(Base, BaseModelMixin):
         user = cls.first_by(username=username)
         if user and user.check_password(password):
             session_id = create_session(user.id)
-            response = redirect(LOGIN_REDIRECT_ROUTE)
+
+            redirect_route = ROLE_ROUTES.get(getattr(user, "role", None), LOGIN_REDIRECT_ROUTE)
+
+            response = redirect(redirect_route)
             response.headers.append(("Set-Cookie", f"session_id={session_id}; Path=/; HttpOnly"))
             return response
         return Response("Invalid credentials", status="401 Unauthorized")
