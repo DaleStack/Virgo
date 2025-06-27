@@ -510,7 +510,7 @@ def register_view(request):
     password = data.get("password")
 
     try:
-      User.register(username, password)
+      User.register(username, password) # .register() is used to register a user
       return User.authenticate(request, username, password)
     except UserAlreadyExists:
       error = "Username already taken."
