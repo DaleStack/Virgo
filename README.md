@@ -492,6 +492,33 @@ Run migrate in terminal:
 ```bash
 py virgo.py lightmigrate
 ```
+this should put a users table in the database.
+
+#### Register a User:
+```Python
+# apps/user/routes.py
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from virgo.core.auth import UserAlreadyExists # import this Exception
+from .models import User # import your User model
+
+def register_view(request):
+  if request.method == "POST":
+    data = request.POST
+    username = data.get("username")
+    password = data.get("password")
+
+    try:
+      User.register(username, password)
+      return User.authenticate(request, username, password)
+    except UserAlreadyExists:
+      error = "Username already taken."
+      return render("register.html", {"error":error}, app="user")
+
+  return render("register.html", app="user")
+routes["/register"] = register_view
+```
 
 
 
