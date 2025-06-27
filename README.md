@@ -610,6 +610,17 @@ def dashboard(request):
 routes["/dashboard"] = dashboard
 ```
 
+Dashboard template view:
+```HTML
+<!-- apps/user/templates/dashboard.html -->
+<h1>Hello, {{ user.username }}!</h1>
+```
+
+This is also where **LOGIN_ROUTE** comes to play:
+
+If a user who is not logged-in tries to access "/dashboard" (a protected route)
+They will be redirected to the login page, preventing them from accessing protected data
+
 
 
 
