@@ -522,6 +522,7 @@ routes["/register"] = register_view
 
 #### Registration template view:
 ```HTML
+<!-- apps/user/templates/register.html -->
 <h1>Register User</h1>
 <form action="" method="POST">
     {% if error %}
