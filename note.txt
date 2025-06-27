@@ -9,4 +9,5 @@
 - Logger Middleware ✔
 - Integrate ORM using SQLAlchemy with Query Helpers ✔
 - Integrate Jinja2 for templating engine ✔
+- Session based Authentication ✔
 - Authentication Middleware ❌
