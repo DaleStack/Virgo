@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String
 from virgo.core.database import Base
 from virgo.core.mixins import BaseModelMixin
-from virgo.core.session import create_session, get_session
+from virgo.core.session import create_session, get_session, destroy_session
 from virgo.core.response import Response, redirect
-from settings import LOGIN_REDIRECT_ROUTE
+from settings import LOGIN_REDIRECT_ROUTE, LOGOUT_REDIRECT_ROUTE
 import bcrypt
 
 class UserAlreadyExists(Exception):
@@ -41,6 +41,27 @@ class UserModel(Base, BaseModelMixin):
 
         hashed = cls.hash_password(password)
         return cls.create(username=username, password=hashed)
+    
+    def logout(self, request):
+        # Extract session_id from cookie
+        cookie = request.environ.get("HTTP_COOKIE", "")
+        session_id = None
+
+        for part in cookie.split(";"):
+            if part.strip().startswith("session_id="):
+                session_id = part.strip().split("=")[1]
+                break
+
+        if session_id:
+            destroy_session(session_id)
+
+        # Clear cookie + redirect
+        response = redirect(LOGOUT_REDIRECT_ROUTE)
+        response.headers.append((
+            "Set-Cookie",
+            "session_id=; Path=/; Max-Age=0; HttpOnly"
+        ))
+        return response
     
 def get_user(request, UserModel):
     cookie = request.environ.get("HTTP_COOKIE", "")
