@@ -623,6 +623,7 @@ They will be redirected to the login page, preventing them from accessing protec
 
 #### Logout:
 ```Python
+# apps/user/routes.py
 from virgo.core.routing import routes
 from virgo.core.response import Response, redirect
 from virgo.core.template import render
@@ -640,6 +641,12 @@ def logout_view(request):
 routes["/logout"] = logout_view
 ```
 
+Dashboard template view:
+```HTML
+<!-- apps/user/templates/dashboard.html -->
+<h1>Hello, {{ user.username }}!</h1>
+<a href="/logout">Logout</a>
+```
 
 
 
