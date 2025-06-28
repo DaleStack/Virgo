@@ -5,6 +5,7 @@ from virgo.core.session import create_session, get_session, destroy_session
 from virgo.core.response import Response, redirect
 from settings import LOGIN_REDIRECT_ROUTE, LOGOUT_REDIRECT_ROUTE, ROLE_ROUTES
 import bcrypt
+from sqlalchemy.orm import relationship # RELATION
 
 class UserAlreadyExists(Exception):
     pass
@@ -15,6 +16,8 @@ class UserModel(Base, BaseModelMixin):
     id = Column(Integer, primary_key=True)
     username = Column(String, unique=True, nullable=False)
     password = Column(String, nullable=False)
+
+    posts = relationship("Post", back_populates="author") # relations
 
 
     def check_password(self, raw_password):

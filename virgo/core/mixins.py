@@ -1,4 +1,5 @@
 from virgo.core.database import SessionLocal
+from sqlalchemy.orm import joinedload
 
 class BaseModelMixin:
     # CREATE
@@ -45,17 +46,25 @@ class BaseModelMixin:
 
     # ALL
     @classmethod
-    def all(cls):
+    def all(cls, load: list = None):
         session = SessionLocal()
-        results = session.query(cls).all()
+        query = session.query(cls)
+        if load:
+            for relation in load:
+                query = query.options(joinedload(getattr(cls, relation)))  # FIX
+        results = query.all()
         session.close()
         return results
 
     # FILTER
     @classmethod
-    def filter_by(cls, **kwargs):
+    def filter_by(cls, load: list = None, **kwargs):
         session = SessionLocal()
-        results = session.query(cls).filter_by(**kwargs).all()
+        query = session.query(cls)
+        if load:
+            for relation in load:
+                query = query.options(joinedload(getattr(cls, relation)))  # FIX
+        results = query.filter_by(**kwargs).all()
         session.close()
         return results
 
