@@ -789,5 +789,51 @@ py virgo.py lightstart post
 py virgo.py lightstart user
 ```
 
+#### Create Post model:
+Navigate to your post app's **models.py**
 
+```Python
+# apps/post/models.py
+
+from sqlalchemy import Column, Integer, String, ForeignKey # Import ForeignKey
+from sqlalchemy.orm import relationship # Import relationship
+from virgo.core.database import Base
+from virgo.core.mixins import BaseModelMixin
+from virgo.core.auth import UserModel # Import Base UserModel
+
+class Post(Base, BaseModelMixin):
+  __tablename__ = "posts"
+
+  id = Column(Integer, primary_key=True)
+  title = Column(String)
+
+  user_id = Column(Integer, ForeignKey("users.id")) # Connect Post model to ForeignKey
+
+  author = relationship("UserModel", back_populates="posts") # Create relationship to Base UserModel
+```
+
+#### Modify Base UserModel:
+Navigate to virgo/core/auth.py
+
+```Python
+# virgo/core/auth.py
+
+from sqlalchemy import Column, Integer, String
+from virgo.core.database import Base
+from virgo.core.mixins import BaseModelMixin
+from virgo.core.session import create_session, get_session, destroy_session
+from virgo.core.response import Response, redirect
+from settings import LOGIN_REDIRECT_ROUTE, LOGOUT_REDIRECT_ROUTE, ROLE_ROUTES
+import bcrypt
+from sqlalchemy.orm import relationship # Import relationship
+
+class UserModel(Base, BaseModelMixin):
+    __tablename__ = "users"
+
+    id = Column(Integer, primary_key=True)
+    username = Column(String, unique=True, nullable=False)
+    password = Column(String, nullable=False)
+
+    posts = relationship("Post", back_populates="author") # Create relationship to Post Model
+```
 
