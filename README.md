@@ -849,5 +849,6 @@ from virgo.core.auth import UserModel # Import UserModel
 
 class User(UserModel): # Pass UserModel as a parameter
     pass
-
 ```
+
+Creating Login and Register function will just be the same.
