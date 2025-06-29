@@ -56,7 +56,7 @@ class BaseModelMixin:
         session.close()
         return results
 
-    # FILTER
+    # FILTER BY
     @classmethod
     def filter_by(cls, load: list = None, **kwargs):
         session = SessionLocal()
@@ -65,6 +65,24 @@ class BaseModelMixin:
             for relation in load:
                 query = query.options(joinedload(getattr(cls, relation)))  # FIX
         results = query.filter_by(**kwargs).all()
+        session.close()
+        return results
+    
+    # ORDER BY
+    @classmethod
+    def order_by(cls, field, direction="asc", load=None):
+        session = SessionLocal()
+        query = session.query(cls)
+
+        if load:
+            for relation in load:
+                query = query.options(joinedload(getattr(cls, relation)))
+
+        column = getattr(cls, field)
+        if direction == "desc":
+            column = column.desc()
+
+        results = query.order_by(column).all()
         session.close()
         return results
 
@@ -86,6 +104,27 @@ class BaseModelMixin:
             total = session.query(cls).count()
         session.close()
         return total
+    
+    # FILTER + ORDER_BY
+    @classmethod
+    def filter_and_order_by(cls, *, load=None, order_field=None, direction="asc", **filters):
+        session = SessionLocal()
+        query = session.query(cls)
+
+        if load:
+            for relation in load:
+                query = query.options(joinedload(getattr(cls, relation)))
+
+        if filters:
+            query = query.filter_by(**filters)
+
+        if order_field:
+            column = getattr(cls, order_field)
+            if direction == "desc":
+                column = column.desc()
+            query = query.order_by(column)
+
+        results = query.all()
     
     
 
