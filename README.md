@@ -779,7 +779,7 @@ routes["/forbidden"] = forbidden # this will be your FORBIDDEN_REDIRECT_ROUTE
 ## Relationships (ORM)
 
 #### Create apps called post and user:
-We will try to make an application with proper structure that's why we will create two apps
+We will try to make an application with proper file structure that's why we will create two apps
 
 ```bash
 py virgo.py lightstart post
