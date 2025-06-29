@@ -836,4 +836,18 @@ class UserModel(Base, BaseModelMixin):
 
     posts = relationship("Post", back_populates="author") # Create relationship to Post Model
 ```
+This alone won't be migrated in the database, that's why we need the user app.
 
+#### Create User model:
+```Python
+# apps/user/models.py
+
+from sqlalchemy import Column, Integer, String
+from virgo.core.database import Base
+from virgo.core.mixins import BaseModelMixin
+from virgo.core.auth import UserModel # Import UserModel
+
+class User(UserModel): # Pass UserModel as a parameter
+    pass
+
+```
