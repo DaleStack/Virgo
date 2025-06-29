@@ -69,6 +69,8 @@ def show_query_help():
     print("  Model.get(id) / get_by_id(id) → Get one record by ID")
     print("  Model.filter_by(**kwargs)     → Get matching records")
     print("  Model.first_by(**kwargs)      → Get the first matching record")
+    print("  Model.order_by(**kwargs)      → Get the ordered record")
+    print("  Model.filter_and_order_by(**kwargs) → Get the match with ordered record")
     print("")
     print("UPDATE:")
     print("  instance.update(**kwargs)     → Update fields of an existing object")
