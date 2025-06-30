@@ -852,3 +852,47 @@ class User(UserModel): # Pass UserModel as a parameter
 ```
 
 Creating Login and Register function will just be the same.
+
+#### Creating Data in relation with the User
+```Python
+# apps/post/routes.py
+
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from virgo.core.decorators import login_required
+from apps.user.models import User
+from .models import Post
+
+@login_required(User)
+def create_post(request):
+    user = request.user
+    
+    if request.method == "POST":
+        data = request.POST
+        title = data.get("title")
+
+        Post.create(title=title, user_id=user.id) # pass the data, as well as the currently logged-in user's id
+        return redirect("/")
+    return render("create_post.html", app="post")
+routes["/create-post"] = create_post
+```
+
+#### Listing the Data
+```Python
+# apps/post/routes.py
+
+from virgo.core.routing import routes
+from virgo.core.response import Response, redirect
+from virgo.core.template import render
+from virgo.core.decorators import login_required
+from apps.user.models import User
+from .models import Post
+
+@login_required(User)
+def list_post(request):
+    user = request.user
+    posts = Post.filter_by(user_id=user.id, load=["author"])
+    return render("list_post.html", {"posts":posts, "user":user}, app="post")
+routes["/"] = list_post
+```
