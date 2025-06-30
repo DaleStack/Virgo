@@ -896,3 +896,4 @@ def list_post(request):
     return render("list_post.html", {"posts":posts, "user":user}, app="post")
 routes["/"] = list_post
 ```
+This is a simple **One-to-Many** Relationship
