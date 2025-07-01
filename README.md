@@ -897,3 +897,8 @@ def list_post(request):
 routes["/"] = list_post
 ```
 This is a simple **One-to-Many** Relationship
+
+### One-to-One
+Soon
+### Many-to-Many
+Soon
