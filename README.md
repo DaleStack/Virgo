@@ -902,3 +902,6 @@ This is a simple **One-to-Many** Relationship
 Soon
 ### Many-to-Many
 Soon
+
+## Querying
+We will tackle all of the built-in query helpers available in Virgo
