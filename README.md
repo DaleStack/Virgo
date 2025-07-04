@@ -908,6 +908,7 @@ We will tackle all of the built-in query helpers available in Virgo
 
 Let's say we have a Note model with only a title field
 #### Create:
+**.create()**
 ```Python
 # apps/note/routes.py
 from .models import Note
