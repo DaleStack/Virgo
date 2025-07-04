@@ -905,3 +905,21 @@ Soon
 
 ## Querying
 We will tackle all of the built-in query helpers available in Virgo
+
+Let's say we have a Note model with only a title field
+#### Create:
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def create_note(request):
+  if request.method == "POST":
+    data = request.POST
+    title = data.get("title")
+
+    Note.create(title=title)
+
+    return redirect("/")
+  return render("create_note.html", app="note")
+routes["/create_post"] = create_note
+```
