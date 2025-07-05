@@ -907,7 +907,7 @@ Soon
 We will tackle all of the built-in query helpers available in Virgo
 
 Let's say we have a Note model with only a title field
-#### Create:
+#### CREATE:
 **.create()**
 ```Python
 # apps/note/routes.py
@@ -922,5 +922,21 @@ def create_note(request):
 
     return redirect("/")
   return render("create_note.html", app="note")
-routes["/create_post"] = create_note
+routes["/create_note"] = create_note
+```
+
+#### READ:
+**.get()**
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def get_note(request, id):
+  note = Note.get(id)
+
+  if not note:
+    return Response("Note not found!", status=404)
+  
+  return render("get_note.html", {"note":note}, app="note")
+routes["/get_note/<id>"] = get_note
 ```
