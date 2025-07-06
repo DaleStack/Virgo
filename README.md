@@ -940,3 +940,18 @@ def get_note(request, id):
   return render("get_note.html", {"note":note}, app="note")
 routes["/get_note/<id>"] = get_note
 ```
+
+**.filter_by()**
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def filtered_note(request):
+  notes = Note.filter_by(title="hello")
+
+  if not notes:
+    return Response("No notes were found!", status=404)
+  
+  return render("filtered_note.html", {"notes":notes}, app="note")
+routes["/filtered_note"] = filtered_note
+```
