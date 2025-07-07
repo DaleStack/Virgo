@@ -1002,3 +1002,20 @@ def ordered_note(request):
 routes["/ordered_note"] = ordered_note
 ```
 
+**filter_and_order_by()**
+Can load relation
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def filtered_and_ordered_note(request):
+  user = request.user
+  notes = Note.filter_and_order_by(user_id=user.id, order_field="title", direction="desc", load=["author"])
+
+  if not notes:
+    return Response("No notes were found!", status=404)
+  
+  return render("filter_order_note.html", {"notes":notes}, app="note")
+routes["/filtered_and_ordered_note"] = filtered_and_ordered_note
+```
+
