@@ -1040,3 +1040,21 @@ def update_note(request, id):
 routes["/update_note/<id>"] = update_note
 ```
 
+#### DELETE:
+**.delete()**
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def delete_note(request, id):
+  note = Note.get(id)
+
+  if not note:
+    return Response("Note not found!", status=404)
+
+  note.delete()
+  return redirect("/")
+  return render("delete_note.html", app="note")
+routes["/delete_note/<id>"] = delete_note
+```
+
