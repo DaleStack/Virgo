@@ -926,6 +926,19 @@ routes["/create_note"] = create_note
 ```
 
 #### READ:
+**.all()**
+Can load relation
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def list_post(request):
+    user = request.user
+    posts = Post.filter_by(user_id=user.id, load=["author"])
+    return render("list_post.html", {"posts":posts, "user":user}, app="post")
+routes["/"] = list_post
+```
+
 **.get()**
 Note: get() is jsut a wrapper of get_by_id() so this will only work for id
 ```Python
@@ -943,6 +956,7 @@ routes["/get_note/<id>"] = get_note
 ```
 
 **.filter_by()**
+Can load relation
 ```Python
 # apps/note/routes.py
 from .models import Note
@@ -973,12 +987,13 @@ routes["/first_note"] = first_note
 ```
 
 **order_by()**
+Can load author
 ```Python
 # apps/note/routes.py
 from .models import Note
 
 def ordered_note(request):
-  notes = Note.order_by("title") # asc by default, add "desc" to make it descending
+  notes = Note.order_by("title") # asc by default, add "desc" to make it descending ("title", "desc")
 
   if not notes:
     return Response("No notes were found!", status=404)
@@ -986,3 +1001,4 @@ def ordered_note(request):
   return render("order_note.html", {"notes":notes}, app="note")
 routes["/ordered_note"] = ordered_note
 ```
+
