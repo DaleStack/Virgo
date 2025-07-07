@@ -965,9 +965,24 @@ from .models import Note
 def filtered_note(request):
   note = Note.first_by(title="hello")
 
-  if not notes:
+  if not note:
     return Response("No notes were found!", status=404)
   
   return render("first_note.html", {"note":note}, app="note")
 routes["/first_note"] = first_note
+```
+
+**order_by()**
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def ordered_note(request):
+  notes = Note.order_by("title") # asc by default, add "desc" to make it descending
+
+  if not notes:
+    return Response("No notes were found!", status=404)
+  
+  return render("order_note.html", {"notes":notes}, app="note")
+routes["/ordered_note"] = ordered_note
 ```
