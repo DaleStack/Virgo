@@ -1019,3 +1019,24 @@ def filtered_and_ordered_note(request):
 routes["/filtered_and_ordered_note"] = filtered_and_ordered_note
 ```
 
+#### UPDATE:
+**.update()**
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def update_note(request, id):
+  note = Note.get(id)
+
+  if not note:
+    return Response("Note not found!", status=404)
+
+  if request.method == "POST":
+    data = request.POST
+    title = data.get("title")
+    note.update(title=title)
+    return redirect("/")  
+  return render("update_note.html", {"note":note}, app="note")
+routes["/update_note/<id>"] = update_note
+```
+

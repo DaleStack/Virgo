@@ -93,17 +93,6 @@ class BaseModelMixin:
         result = session.query(cls).filter_by(**kwargs).first()
         session.close()
         return result
-
-    # COUNT
-    @classmethod
-    def count(cls, **kwargs):
-        session = SessionLocal()
-        if kwargs:
-            total = session.query(cls).filter_by(**kwargs).count()
-        else:
-            total = session.query(cls).count()
-        session.close()
-        return total
     
     # FILTER + ORDER_BY
     @classmethod

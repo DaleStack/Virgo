@@ -77,10 +77,6 @@ def show_query_help():
     print("")
     print("DELETE:")
     print("  instance.delete()             → Delete an object")
-    print("")
-    print("OTHER:")
-    print("  Model.count()                 → Count all records")
-    print("  Model.count(field=value)      → Count records with match")
 
 if __name__ == "__main__":
     command = sys.argv[1] if len(sys.argv) > 1 else ""
