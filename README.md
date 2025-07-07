@@ -927,6 +927,7 @@ routes["/create_note"] = create_note
 
 #### READ:
 **.get()**
+Note: get() is jsut a wrapper of get_by_id() so this will only work for id
 ```Python
 # apps/note/routes.py
 from .models import Note
@@ -954,4 +955,19 @@ def filtered_note(request):
   
   return render("filtered_note.html", {"notes":notes}, app="note")
 routes["/filtered_note"] = filtered_note
+```
+
+**first_by()**
+```Python
+# apps/note/routes.py
+from .models import Note
+
+def filtered_note(request):
+  note = Note.first_by(title="hello")
+
+  if not notes:
+    return Response("No notes were found!", status=404)
+  
+  return render("first_note.html", {"note":note}, app="note")
+routes["/first_note"] = first_note
 ```
