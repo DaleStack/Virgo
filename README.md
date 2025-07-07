@@ -987,7 +987,7 @@ routes["/first_note"] = first_note
 ```
 
 **order_by()**
-Can load author
+Can load relation
 ```Python
 # apps/note/routes.py
 from .models import Note
