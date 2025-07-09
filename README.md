@@ -21,6 +21,11 @@ Built for learning — inspired by Django, but simplified for clarity.
 
 ## 🚀 Getting Started
 
+## Clone Repository
+```bash
+git clone --depth=1 https://github.com/DaleStack/Virgo.git .
+```
+
 ## Create a new app
 
 ```bash
