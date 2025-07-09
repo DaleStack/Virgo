@@ -1,6 +1,6 @@
 from virgo.core.auth import get_user
 from virgo.core.response import redirect
-from virgo.core.settings import LOGIN_ROUTE, FORBIDDEN_REDIRECT_ROUTE
+from settings import LOGIN_ROUTE, FORBIDDEN_REDIRECT_ROUTE
 
 def login_required(UserModel):
     def decorator(view_func):
