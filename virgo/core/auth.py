@@ -3,7 +3,7 @@ from virgo.core.database import Base
 from virgo.core.mixins import BaseModelMixin
 from virgo.core.session import create_session, get_session, destroy_session
 from virgo.core.response import Response, redirect
-from virgo.core.settings import LOGIN_REDIRECT_ROUTE, LOGOUT_REDIRECT_ROUTE, ROLE_ROUTES
+from settings import LOGIN_REDIRECT_ROUTE, LOGOUT_REDIRECT_ROUTE, ROLE_ROUTES
 import bcrypt
 
 
