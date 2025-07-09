@@ -28,7 +28,7 @@ def test_successful_login():
     # First register a user
     user = UserModel.register(username="keilogger", password="pass123")
 
-    # Attempt login with correct password
+    # Login with the registered user
     response = UserModel.authenticate(mock_request(), "keilogger", "pass123")
 
     assert isinstance(response, Response)
@@ -36,10 +36,11 @@ def test_successful_login():
     assert any("session_id=" in h[1] for h in response.headers)
 
 def test_failed_login():
+    # Login with a non-existent user
     UserModel.register(username="ghost", password="invisible")
 
     response = UserModel.authenticate(mock_request(), "ghost", "wrongpass")
 
     assert isinstance(response, Response)
     assert response.status == "401 Unauthorized"
-    assert "Invalid credentials" in response.content
+    assert "Invalid credentials" in response.body.decode()
