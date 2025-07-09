@@ -1,8 +1,8 @@
 import sys
 import os
 from virgo.core.lightserver import serve
-from migrations import run_migrations  
-from version import __version__
+from virgo.core.migrations import run_migrations  
+from virgo.core.version import __version__
 
 def ensure_db():
     """Create an empty SQLite database if not already present."""
