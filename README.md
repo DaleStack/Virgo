@@ -19,6 +19,11 @@ Built for learning — inspired by Django, but simplified for clarity.
 - Query Helper
 ---
 
+## 📄 License
+
+Virgo Framework is open source under the [MIT License](LICENSE).
+
+
 ## 🚀 Getting Started
 
 ## Clone Repository
